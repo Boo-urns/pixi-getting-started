@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>pixi.js example 1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+    </style>
+    <script src="pixi.js"></script>
+</head>
+<body>
+    <script>
+ 
+    // create new instance of a pixi stage
+    var stage = new PIXI.Stage(0x66FF99);
+
+    // create renderer instance 
+    var renderer = PIXI.autoDetectRenderer(400, 300);
+
+    // add renderer view element to the DOM
+    document.body.appendChild(renderer.view);
+
+    requestAnimFrame( animate );
+
+
+    /*                               \*
+       CREATING AND ADDING A SPRITE
+    \*                              */
+
+    // create texture from image path
+    var texture = PIXI.Texture.fromImage('bunny.png');
+    // create a new Sprite using the texture
+    var bunny = new PIXI.Sprite(texture);
+
+    // center the sprites anchor point
+    bunny.anchor.x = 0.5;
+    bunny.anchor.y = 0.5;
+
+    console.log();
+    // move the sprite to center of screen;
+    bunny.position.x = renderer.width / 2;
+    bunny.position.y = renderer.height / 2;
+
+    stage.addChild(bunny); 
+
+    function animate() {
+        requestAnimFrame( animate );
+
+        // for fun - lets rotate mr rabbit
+        bunny.rotation += 0.05;
+
+        var bunnyX = bunny.position.x;
+        if(bunnyX > renderer.width) {
+            bunny.position.x = -5;
+        } else {
+            bunny.position.x += 0.5;
+        }
+
+        // render the stage
+        renderer.render(stage);
+    }
+ 
+    </script>
+ 
+    </body>
+</html>
