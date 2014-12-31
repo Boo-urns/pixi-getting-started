@@ -31,31 +31,44 @@
 
     // create texture from image path
     var texture = PIXI.Texture.fromImage('bunny.png');
+
+    var bunnies = new Array();
+    for(var i=0; i<=10; i++){ 
+        bunnies[i] = new PIXI.Sprite(texture);
+        bunnies[i].anchor.x = 0.5;
+        bunnies[i].anchor.x = 0.5;
+
+        bunnies[i].position.x = 0 - (100 * Math.random());
+        bunnies[i].position.y = 25 * i;
+
+        stage.addChild(bunnies[i]);
+    }
     // create a new Sprite using the texture
-    var bunny = new PIXI.Sprite(texture);
+    // var bunny = new PIXI.Sprite(texture);
 
-    // center the sprites anchor point
-    bunny.anchor.x = 0.5;
-    bunny.anchor.y = 0.5;
+    // // center the sprites anchor point
+    // bunny.anchor.x = 0.5;
+    // bunny.anchor.y = 0.5;
 
-    console.log();
-    // move the sprite to center of screen;
-    bunny.position.x = renderer.width / 2;
-    bunny.position.y = renderer.height / 2;
+    // // move the sprite to center of screen;
+    // bunny.position.x = renderer.width / 2;
+    // bunny.position.y = renderer.height / 2;
 
-    stage.addChild(bunny); 
+    //stage.addChild(bunny); 
 
     function animate() {
         requestAnimFrame( animate );
 
-        // for fun - lets rotate mr rabbit
-        bunny.rotation += 0.05;
+        for(var i=0; i<bunnies.length; i++) {
+            //bunnies[i].rotation += 0.05;
 
-        var bunnyX = bunny.position.x;
-        if(bunnyX > renderer.width) {
-            bunny.position.x = -5;
-        } else {
-            bunny.position.x += 0.5;
+            var curBunnyX = bunnies[i].position.x;
+            if(curBunnyX > renderer.width) {
+                bunnies[i].position.x = -5;
+            } else {
+                bunnies[i].position.x += 0.5;
+            }
+
         }
 
         // render the stage
