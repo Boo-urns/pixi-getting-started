@@ -6,24 +6,24 @@
             margin: 0;
             padding: 0;
             background-color: #000000;
-            perspective: 600px;
-            perspective-origin: 30% 50%;
-                -webkit-perspective-origin: 30% 50%;
-            transform-style: preserve-3d;
+            overflow: hidden;
         }
-        #container {
-
+        #gameboard {
+            perspective: 600px;
+            -webkit-perspective-origin: 20% 50%;
+                    perspective-origin: 20% 50%;
+            transform-style: preserve-3d;
+            position: relative;
+            left: 200px;
         }
         canvas {
             transform: rotate3d(.25,0,0,60deg);
-            position: relative;
-            left: 200px;
         }
     </style>
     <script src="pixi.js"></script>
 </head>
 <body>
-    <div id="container">
+    <div id="gameboard">
     <script>
  
     // create new instance of a pixi stage
@@ -34,7 +34,7 @@
     var renderer = PIXI.autoDetectRenderer(400, 300);
 
     // add renderer view element to the DOM
-    document.body.appendChild(renderer.view);
+    document.getElementById('gameboard').appendChild(renderer.view);
 
     requestAnimFrame( animate );
 
