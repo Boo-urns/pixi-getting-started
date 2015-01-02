@@ -1,171 +1,22 @@
+<!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>pixi.js example 1</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            overflow: hidden;
-        }
-        #another-stage {
-            left: 200px;
-        }
-        #another-stage canvas {
-            position: relative;
-            top: 90px;
-            left: 250px;
-        }
-        #gameboard {
-            perspective: 600px;
-            -webkit-perspective-origin: 20% 50%;
-                    perspective-origin: 20% 50%;
-            transform-style: preserve-3d;
-            position: relative;
-            left: 200px;
-        }
-        #gameboard canvas {
-            transform: rotate3d(.25,0,0,60deg);
-        }
-    </style>
-    <script src="pixi.dev.js"></script>
-    <script src="fpsmeter.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+
+    <script src="js/pixi.dev.js"></script>
+    <script src="js/fpsmeter.min.js"></script>
 </head>
 <body>
-    <div id="another-stage"></div>
-    <div id="gameboard">
-    </div>
     
+    <div id="top-stage"></div>
+    <div id="bottom-stage"></div>
+
+    <script src="js/top-stage.js"></script>
+    <script src="js/bottom-stage.js"></script>
     
-
-    <script>
- 
-        // create new instance of a pixi stage
-        var stage = new PIXI.Stage(0x66FF99);
-        var myContainer = new PIXI.DisplayObjectContainer();
-        var meter = new FPSMeter();
-
-        // create renderer instance 
-        var renderer = PIXI.autoDetectRenderer(400, 300);
-
-        // add renderer view element to the DOM
-        document.getElementById('gameboard').appendChild(renderer.view);
-
-        requestAnimFrame( animate );
-
-
-        /*                               \*
-           CREATING AND ADDING A SPRITE
-        \*                              */
-
-        // create texture from image path
-        var texture = PIXI.Texture.fromImage('ball.png');
-
-        var orbs = new Array();
-        for(var i=0; i<=10; i++){ 
-            // create a new Sprite using the texture
-            orbs[i] = new PIXI.Sprite(texture);
-
-            // Scaling the image for the transform.
-            // -- Needs to be larger than it will be displayed 
-            //    so it renders clearer on transform
-            orbs[i].scale = new PIXI.Point(.25,.25);
-            
-            // Setting the anchor points to the middle values 0 - 1
-            orbs[i].anchor.x = 0.5;
-            orbs[i].anchor.y = 0.5;
-
-            // Set the graphic's position
-            orbs[i].position.x = 0 - (100 * Math.random());
-            orbs[i].position.y = 25 * i;
-
-
-            myContainer.addChild(orbs[i]);
-        }
-
-        stage.addChild(myContainer);
-        
-      
-      
-        function animate() {
-            requestAnimFrame( animate );
-
-            for(var i=0; i<orbs.length; i++) {
-                //orbs[i].rotation += 0.05;
-
-                var curOrbX = orbs[i].position.x;
-                if(curOrbX > renderer.width) {
-                    orbs[i].position.x = -5;
-                } else {
-                    orbs[i].position.x += 0.5;
-                }
-
-            }
-
-            meter.tick();
-
-            // render the stage
-            renderer.render(stage);
-        }
- 
-    </script>
-   
-
-
-    <script>
- 
-        // create new instance of a pixi stage
-        var topStage = new PIXI.Stage(0x66FF99);
-        var container = new PIXI.DisplayObjectContainer();
-        // create renderer instance 
-        var rendererTop = PIXI.autoDetectRenderer(330, 225);
-
-        // add renderer view element to the DOM
-        document.getElementById('another-stage').appendChild(rendererTop.view);
-
-        requestAnimFrame( animateStage );    
-      
-      
-        /*                               \*
-           CREATING AND ADDING A SPRITE
-        \*                              */
-
-        // create texture from image path
-        var btexture = PIXI.Texture.fromImage('bunny.png');
-        var bunnies = new Array();
-        for(var i=0; i<=1; i++){ 
-            // create a new Sprite using the texture
-            bunnies[i] = new PIXI.Sprite(btexture);
-
-            // Setting the anchor points to the middle values 0 - 1
-            bunnies[i].anchor.x = 0.5;
-            bunnies[i].anchor.y = 0.5;
-
-            // Set the graphic's position
-            bunnies[i].position.x = rendererTop.width / 2;
-            bunnies[i].position.y = rendererTop.height / 2;
-
-
-            container.addChild(bunnies[i]);
-        }
-
-        topStage.addChild(container);
-
-        function animateStage() {
-            requestAnimFrame( animateStage );
-
-             for(var i=0; i<bunnies.length; i++) {
-                bunnies[i].rotation += 0.05;
-            }
-
-            // render the stage
-            rendererTop.render(topStage);
-        }
-     
-    </script>
-     
 </body>
 </html>

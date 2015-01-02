@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    overflow: hidden;
+}
+#top-stage {
+    left: 200px;
+}
+#top-stage canvas {
+    position: relative;
+    top: 90px;
+    left: 250px;
+}
+#bottom-stage {
+    perspective: 600px;
+    -webkit-perspective-origin: 20% 50%;
+            perspective-origin: 20% 50%;
+    transform-style: preserve-3d;
+    position: relative;
+    left: 200px;
+}
+#bottom-stage canvas {
+    transform: rotate3d(.25,0,0,60deg);
+}
