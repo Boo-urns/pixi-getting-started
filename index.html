@@ -48,32 +48,30 @@
 
     var orbs = new Array();
     for(var i=0; i<=10; i++){ 
+        // create a new Sprite using the texture
         orbs[i] = new PIXI.Sprite(texture);
 
+        // Scaling the image for the transform.
+        // -- Needs to be larger than it will be displayed 
+        //    so it renders clearer on transform
         orbs[i].scale = new PIXI.Point(.25,.25);
+        
+        // Setting the anchor points to the middle values 0 - 1
         orbs[i].anchor.x = 0.5;
         orbs[i].anchor.x = 0.5;
 
+        // Set the graphic's position
         orbs[i].position.x = 0 - (100 * Math.random());
         orbs[i].position.y = 25 * i;
+
 
         myContainer.addChild(orbs[i]);
     }
 
     stage.addChild(myContainer);
-    // create a new Sprite using the texture
-    // var bunny = new PIXI.Sprite(texture);
-
-    // // center the sprites anchor point
-    // bunny.anchor.x = 0.5;
-    // bunny.anchor.y = 0.5;
-
-    // // move the sprite to center of screen;
-    // bunny.position.x = renderer.width / 2;
-    // bunny.position.y = renderer.height / 2;
-
-    //stage.addChild(bunny); 
-
+    
+  
+  
     function animate() {
         requestAnimFrame( animate );
 
